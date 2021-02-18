@@ -1,18 +1,38 @@
 import React from 'react'
+import moment from 'moment'
+import { useDispatch } from 'react-redux';
+import { activeNote } from '../../actions/notes';
+export const TareaEntrada = ({ id, title, body, date, url }) => {
+    const noteDate = moment(date);
+    const dispatch = useDispatch();
+    const handleEntryClick = () => {
+        dispatch(
+            activeNote(id, {
+                title, body, date, url
+            })
+        )
 
-export const TareaEntrada = () => {
+    }
     return (
-        <div className="tarea__entrada pointer">
-            <div className="tarea__entrada-imagen" style={{backgroundSize: 'cover', backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png)'}}>
+        <div className="tarea__entrada pointer" onClick={handleEntryClick}>
+            {
+                url &&
+                <div className="tarea__entrada-imagen" 
+                    style={{
+                        backgroundSize: 'cover', 
+                        backgroundImage: `url(${url})`
+                    }}
+                >
 
-            </div>
+                </div>
+            }
             <div className="tarea__entrada-body">
-                <p className="tarea__entrada-titulo">Un Nuevo Dia</p>
-                <p className="tarea__entrada-content">Un nuevo  dia ya hiciste </p>
+                <p className="tarea__entrada-titulo">{title}</p>
+                <p className="tarea__entrada-content">{body} </p>
             </div>
             <div className="tarea__entrada-fecha-caja">
-                <span>Lunes</span>
-                <h4>28</h4>
+                <span>{noteDate.format('ddd')}</span>
+                <h4>{noteDate.format('Do')}</h4>
             </div>
         </div>
     )

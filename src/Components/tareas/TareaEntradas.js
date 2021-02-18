@@ -1,13 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { TareaEntrada } from './TareaEntrada'
 
 export const TareaEntradas = () => {
-    const entradas = [1,2,3,4,5]
+    const {notes} = useSelector(state => state.notes)
+    
     return (
         <div className="tareas_entradas">
             {
-                entradas.map(value=> (
-                    <TareaEntrada key={value} />
+                notes.map(note=> (
+                    <TareaEntrada key={note.id} {...note} />
                 ))
             }
         </div>

@@ -40,7 +40,7 @@ export const RegistroScreen = () => {
     return (
         <>
             <h3 className="auth__title" >Registro</h3>
-            <form onSubmit={handleRegistro}>
+            <form onSubmit={handleRegistro} className="animate__animated animate__fadeIn animate__faster">
                 {  
                     msgError &&
                     (
